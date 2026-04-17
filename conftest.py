@@ -5,6 +5,7 @@ import pytest_html
 from datetime import datetime
 from dotenv import load_dotenv
 from selenium import webdriver
+from selenium.common import NoSuchWindowException, WebDriverException
 
 load_dotenv()
 
@@ -12,6 +13,9 @@ load_dotenv()
 @pytest.fixture
 def driver():
     options = webdriver.ChromeOptions()
+
+    if os.getenv("HEADLESS") == "true":
+        options.add_argument("--headless=new")
 
     prefs = {
         "credentials_enable_service": False,
@@ -53,13 +57,8 @@ def pytest_runtest_makereport(item, call):
             file_name = f"{test_name}_{timestamp}.png"
             file_path = os.path.join(screenshots_dir, file_name)
 
-            driver.save_screenshot(file_path)
-
-            with open(file_path, "rb") as image_file:
-                encoded_image = base64.b64encode(image_file.read()).decode("utf-8")
-
-            extra = getattr(report, "extras", [])
-            extra.append(pytest_html.extras.image(encoded_image, mime_type="image/png"))
-            report.extras = extra
-
-            print(f"\n[SCREENSHOT] Saved: {file_path}")
+            try:
+                driver.save_screenshot(file_path)
+                print(f"\n[SCREENSHOT] Saved: {file_path}")
+            except (NoSuchWindowException, WebDriverException) as e:
+                print(f"\n[SCREENSHOT] Could not capture screenshot: {e}")

@@ -1,3 +1,5 @@
+from operator import index
+
 from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -12,6 +14,8 @@ class InventoryPage(BasePage):
     ADD_TO_CART_BUTTONS = (By.XPATH, "//button[contains(text(),'Add to cart')]")
     CART_ICON = (By.CLASS_NAME, "shopping_cart_link")
     CART_BADGE = (By.CLASS_NAME, "shopping_cart_badge")
+    APP_LOGO = (By.CLASS_NAME, "app_logo")
+    ADD_TO_CART_BUTTONS = (By.XPATH, "//button[contains(text(),'Add to cart')]")
 
     X_LINK = (By.XPATH, "//a[contains(@href, 'twitter')]")
     FACEBOOK_LINK = (By.XPATH, "//a[contains(@href, 'facebook')]")
@@ -70,3 +74,21 @@ class InventoryPage(BasePage):
             cookie_button.click()
         except:
             pass
+    
+    def is_logo_visible(self):
+        return self.find(self.APP_LOGO).is_displayed()
+          
+    def get_logo_text(self):
+        return self.get_text(self.APP_LOGO)
+
+
+    def is_cart_icon_visible(self):
+        return self.find(self.CART_ICON).is_displayed()
+
+
+    def is_burger_menu_visible(self):
+        return self.find(self.BURGER_BUTTON).is_displayed()
+    
+    def add_item_by_index(self, index):
+        buttons = self.find_all(self.ADD_TO_CART_BUTTONS)
+        buttons[index].click()
