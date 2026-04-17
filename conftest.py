@@ -1,5 +1,7 @@
 import os
+import base64
 import pytest
+import pytest_html
 from datetime import datetime
 from dotenv import load_dotenv
 from selenium import webdriver
@@ -47,9 +49,17 @@ def pytest_runtest_makereport(item, call):
             os.makedirs(screenshots_dir, exist_ok=True)
 
             timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-            test_name = item.name
+            test_name = item.name.replace("/", "_").replace(" ", "_")
             file_name = f"{test_name}_{timestamp}.png"
             file_path = os.path.join(screenshots_dir, file_name)
 
             driver.save_screenshot(file_path)
+
+            with open(file_path, "rb") as image_file:
+                encoded_image = base64.b64encode(image_file.read()).decode("utf-8")
+
+            extra = getattr(report, "extras", [])
+            extra.append(pytest_html.extras.image(encoded_image, mime_type="image/png"))
+            report.extras = extra
+
             print(f"\n[SCREENSHOT] Saved: {file_path}")

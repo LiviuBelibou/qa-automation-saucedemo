@@ -13,6 +13,10 @@ class InventoryPage(BasePage):
     CART_ICON = (By.CLASS_NAME, "shopping_cart_link")
     CART_BADGE = (By.CLASS_NAME, "shopping_cart_badge")
 
+    X_LINK = (By.XPATH, "//a[contains(@href, 'twitter')]")
+    FACEBOOK_LINK = (By.XPATH, "//a[contains(@href, 'facebook')]")
+    LINKEDIN_LINK = (By.XPATH, "//a[contains(@href, 'linkedin')]")
+
     def get_page_title(self):
         return self.get_text(self.PAGE_TITLE)
 
@@ -43,3 +47,26 @@ class InventoryPage(BasePage):
 
     def get_cart_badge_text(self):
         return self.get_text(self.CART_BADGE)
+
+    def click_x_link(self):
+        self.click(self.X_LINK)
+
+    def click_facebook_link(self):
+        self.click(self.FACEBOOK_LINK)
+
+    def click_linkedin_link(self):
+        self.click(self.LINKEDIN_LINK)
+
+    def switch_to_new_tab(self, old_handles):
+        current_handles = self.driver.window_handles
+        self.wait.until(lambda d: len(d.window_handles) > len(current_handles) - 1)
+        self.driver.switch_to.window(self.driver.window_handles[-1])
+
+    def dismiss_cookie_banner_if_present(self):
+        try:
+            cookie_button = self.wait.until(
+                EC.element_to_be_clickable((By.ID, "onetrust-accept-btn-handler"))
+            )
+            cookie_button.click()
+        except:
+            pass
