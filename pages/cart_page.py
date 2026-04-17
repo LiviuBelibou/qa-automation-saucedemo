@@ -8,6 +8,8 @@ class CartPage(BasePage):
 
     def open_cart(self):
         self.click(self.CART_ICON)
+        self.wait_for_url("cart")
 
     def click_checkout(self):
         self.click(self.CHECKOUT_BUTTON)
+        self.wait_for_url("checkout-step-one")

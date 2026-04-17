@@ -12,9 +12,9 @@ def test_checkout_flow(driver, credentials):
 
     inventory_page = InventoryPage(driver)
     inventory_page.add_first_item_to_cart()
+    inventory_page.open_cart()
 
     cart_page = CartPage(driver)
-    cart_page.open_cart()
     cart_page.click_checkout()
 
     checkout_page = CheckoutPage(driver)
