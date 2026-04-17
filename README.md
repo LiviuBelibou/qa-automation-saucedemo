@@ -1,3 +1,9 @@
+This project demonstrates a scalable UI automation framework built using Selenium, pytest, and the Page Object Model (POM).
+
+![Tests](https://github.com/LiviuBelibou/qa-automation-saucedemo/actions/workflows/tests.yml/badge.svg)
+
+
+
 # QA Automation Framework - SauceDemo
 
 UI test automation framework built using **Python, Selenium, and pytest**, applying the **Page Object Model (POM)** design pattern with a reusable **BasePage**.
