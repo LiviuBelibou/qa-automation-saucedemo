@@ -6,10 +6,6 @@ from selenium import webdriver
 load_dotenv()
 
 
-
-email = os.getenv("TEST_EMAIL", "standard_user")
-password = os.getenv("TEST_PASSWORD", "secret_sauce")
-
 @pytest.fixture
 def driver():
     options = webdriver.ChromeOptions()
@@ -31,10 +27,6 @@ def driver():
 
 @pytest.fixture
 def credentials():
-    email = os.getenv("TEST_EMAIL")
-    password = os.getenv("TEST_PASSWORD")
-
-    assert email is not None, "TEST_EMAIL is not set"
-    assert password is not None, "TEST_PASSWORD is not set"
-
+    email = os.getenv("TEST_EMAIL", "standard_user")
+    password = os.getenv("TEST_PASSWORD", "secret_sauce")
     return email, password
