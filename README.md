@@ -1,52 +1,50 @@
-This project demonstrates a scalable UI automation framework built using Selenium, pytest, and the Page Object Model (POM).
+QA Automation Framework - SauceDemo
 
-![Tests](https://github.com/LiviuBelibou/qa-automation-saucedemo/actions/workflows/tests.yml/badge.svg)
+A hybrid UI and API test automation framework built with Python, Selenium, pytest, and requests, following best practices like the Page Object Model (POM) and clean test architecture.
 
+⸻
 
+🚀 Tech Stack
 
-# QA Automation Framework - SauceDemo
+* Python
+* Selenium WebDriver
+* pytest
+* requests (API testing)
+* Page Object Model (POM)
+* BasePage design pattern
+* python-dotenv
+* jsonschema (API validation)
+* pytest-html (reporting)
 
-UI test automation framework built using **Python, Selenium, and pytest**, applying the **Page Object Model (POM)** design pattern with a reusable **BasePage**.
+⸻
 
----
+📌 Features
 
-## 🛠 Tech Stack
-- Python
-- Selenium WebDriver
-- pytest
-- Page Object Model (POM)
-- BasePage pattern
-- python-dotenv
+UI Automation
 
----
+* Login functionality (positive & negative scenarios)
+* Logout flow
+* Inventory page validation
+* Product sorting
+* Cart functionality (add/remove items)
+* Checkout flow
+* Social media link validation (X, Facebook, LinkedIn)
+* Headless execution support
 
-## ✅ Features Covered
-- Successful login
-- Login validation (negative scenarios)
-- Logout flow
-- Inventory page verification
-- Product sorting validation
+API Automation
 
----
+* API client abstraction layer
+* GET and POST requests
+* Login API validation
+* Parametrized API tests
+* Schema validation
+* Environment-based configuration
 
-## 📁 Project Structure
-pages/
-base_page.py
-login_page.py
-inventory_page.py
+Advanced Features
 
-tests/
-test_login.py
-test_login_validation.py
-test_inventory.py
-test_ui.py
----
-
-## ⚙️ Setup
-
-1. Clone the repository
-
-```bash
-git clone https://github.com/LiviuBelibou/qa-automation-saucedemo.git
-cd qa-automation-saucedemo
-
+* Hybrid UI + API test (combo test)
+* Fixtures for reusable setup
+* Explicit waits for stability
+* Screenshot capture on failure
+* HTML test reports
+* GitHub Actions CI integration

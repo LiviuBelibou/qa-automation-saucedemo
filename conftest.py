@@ -1,11 +1,14 @@
 import os
-import base64
 import pytest
-import pytest_html
 from datetime import datetime
+
+import pytest_html
 from dotenv import load_dotenv
 from selenium import webdriver
-from selenium.common import NoSuchWindowException, WebDriverException
+from selenium.common.exceptions import WebDriverException, NoSuchWindowException
+
+from api.api_client import APIClient
+from config import TEST_EMAIL, TEST_PASSWORD, HEADLESS
 
 load_dotenv()
 
@@ -14,7 +17,7 @@ load_dotenv()
 def driver():
     options = webdriver.ChromeOptions()
 
-    if os.getenv("HEADLESS") == "true":
+    if HEADLESS:
         options.add_argument("--headless=new")
 
     prefs = {
@@ -28,6 +31,7 @@ def driver():
     options.add_argument("--disable-notifications")
     options.add_argument("--incognito")
     options.add_argument("--start-maximized")
+    options.add_argument("--window-size=1920,1080")
 
     driver = webdriver.Chrome(options=options)
     yield driver
@@ -36,9 +40,27 @@ def driver():
 
 @pytest.fixture
 def credentials():
-    email = os.getenv("TEST_EMAIL", "standard_user")
-    password = os.getenv("TEST_PASSWORD", "secret_sauce")
-    return email, password
+    return TEST_EMAIL, TEST_PASSWORD
+
+
+@pytest.fixture
+def api_client():
+    return APIClient()
+
+
+@pytest.fixture
+def valid_login_payload():
+    return {
+        "email": "eve.holt@reqres.in",
+        "password": "cityslicka",
+    }
+
+
+@pytest.fixture
+def invalid_login_payload():
+    return {
+        "email": "peter@klaven",
+    }
 
 
 @pytest.hookimpl(hookwrapper=True)

@@ -2,3 +2,5 @@ selenium
 pytest
 python-dotenv
 pytest-html
+requests
+jsonschema
