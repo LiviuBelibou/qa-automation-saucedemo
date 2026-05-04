@@ -31,3 +31,8 @@ jobs:
         HEADLESS: "true"
       run: |
         pytest -v
+    - name: Install Playwright browsers
+
+      run: |
+
+        python -m playwright install chromium

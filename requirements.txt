@@ -4,3 +4,5 @@ python-dotenv
 pytest-html
 requests
 jsonschema
+playwright
+pytest-playwright
