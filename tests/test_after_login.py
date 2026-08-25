@@ -1,10 +1,11 @@
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from conftest import driver
+import pytest
+
 from pages.cart_page import CartPage
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
+
+
+pytestmark = pytest.mark.selenium
 
 
 def test_page_header(driver, credentials):

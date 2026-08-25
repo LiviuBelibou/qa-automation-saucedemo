@@ -1,4 +1,9 @@
+import pytest
+
 from pages.login_page import LoginPage
+
+
+pytestmark = pytest.mark.selenium
 
 
 def test_missing_password_shows_error(driver):

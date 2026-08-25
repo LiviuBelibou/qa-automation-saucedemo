@@ -8,3 +8,4 @@ __pycache__/
 .idea/
 reports/
 screenshots/
+test-results/

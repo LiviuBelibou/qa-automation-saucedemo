@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 
 class CartPage(BasePage):
     CART_ICON = (By.CLASS_NAME, "shopping_cart_link")
+    ITEM_NAMES = (By.CLASS_NAME, "inventory_item_name")
     CHECKOUT_BUTTON = (By.ID, "checkout")
     REMOVE_BUTTONS = (By.XPATH, "//button[contains(text(),'Remove')]")
     CONTINUE_SHOPPING_BUTTON = (By.ID, "continue-shopping")
@@ -19,13 +20,16 @@ class CartPage(BasePage):
     def get_remove_buttons_count(self):
         return len(self.driver.find_elements(*self.REMOVE_BUTTONS))
 
+    def get_item_names(self):
+        return [item.text for item in self.find_all(self.ITEM_NAMES)]
+
     def is_continue_shopping_visible(self):
         return self.find(self.CONTINUE_SHOPPING_BUTTON).is_displayed()
-    
+
     def remove_first_item(self):
         buttons = self.find_all(self.REMOVE_BUTTONS)
         buttons[0].click()
 
     def remove_all_items(self):
-         while self.get_remove_buttons_count() > 0:
+        while self.get_remove_buttons_count() > 0:
             self.driver.find_elements(*self.REMOVE_BUTTONS)[0].click()

@@ -1,5 +1,10 @@
+import pytest
+
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
+
+
+pytestmark = pytest.mark.selenium
 
 
 def test_inventory_page_shows_products_after_login(driver, credentials):

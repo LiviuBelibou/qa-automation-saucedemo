@@ -1,9 +1,12 @@
-from selenium.webdriver.common.by import By
+import pytest
+
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from conftest import driver
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
+
+
+pytestmark = pytest.mark.selenium
 
 
 def test_successful_login_redirects_to_inventory(driver, credentials):
@@ -26,7 +29,7 @@ def test_inventory_page_title_is_visible_after_login(driver, credentials):
     inventory_page = InventoryPage(driver)
 
     assert inventory_page.get_page_title() == "Products"
-    
+
 
 def test_login_button_is_visible_and_enabled(driver):
     login_page = LoginPage(driver)
@@ -51,4 +54,3 @@ def test_logout_redirects_to_login(driver, credentials):
     wait.until(EC.visibility_of_element_located(LoginPage.USERNAME_INPUT))
 
     assert "saucedemo.com" in driver.current_url
-    

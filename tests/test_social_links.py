@@ -1,6 +1,11 @@
+import pytest
+
 from selenium.webdriver.support.ui import WebDriverWait
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
+
+
+pytestmark = [pytest.mark.selenium, pytest.mark.external]
 
 
 def test_x_social_link(driver, credentials):

@@ -1,8 +1,13 @@
+import pytest
+
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
 
 
-def test_api_and_ui_login_flow(driver, credentials, api_client):
+pytestmark = pytest.mark.combined
+
+
+def test_independent_api_and_ui_smoke_checks(driver, credentials, api_client):
     username, password = credentials
 
     api_payload = {

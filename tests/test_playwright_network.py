@@ -1,4 +1,10 @@
+import pytest
+
 from playwright_pages.login_page import PlaywrightLoginPage
+
+
+pytestmark = pytest.mark.playwright
+
 
 def test_block_images_during_login(page, credentials):
 

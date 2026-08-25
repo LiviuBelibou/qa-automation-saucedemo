@@ -1,4 +1,9 @@
+import pytest
+
 from playwright_pages.login_page import PlaywrightLoginPage
+
+
+pytestmark = pytest.mark.playwright
 
 
 def test_playwright_login_with_pom(page, credentials):

@@ -13,4 +13,7 @@ class PlaywrightInventoryPage:
         return self.page.locator(self.CART_BADGE).inner_text()
 
     def click_twitter(self):
-        return self.page.context.expect_page(lambda p: True, timeout=5000)
+        with self.page.context.expect_page(timeout=5000) as new_page_info:
+            self.page.locator(self.TWITTER_LINK).click()
+
+        return new_page_info.value
