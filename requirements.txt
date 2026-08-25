@@ -1,8 +1,8 @@
-selenium
-pytest
-python-dotenv
-pytest-html
-requests
-jsonschema
-playwright
-pytest-playwright
+selenium==4.47.0
+pytest==9.1.1
+python-dotenv==1.2.3
+pytest-html==4.2.0
+requests==2.34.2
+jsonschema==4.26.0
+playwright==1.62.0
+pytest-playwright==0.9.0

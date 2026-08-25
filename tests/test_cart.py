@@ -1,5 +1,11 @@
+import pytest
+
+from pages.cart_page import CartPage
+from pages.inventory_page import InventoryPage
 from pages.login_page import LoginPage
-from selenium.webdriver.common.by import By
+
+
+pytestmark = pytest.mark.selenium
 
 
 def test_add_item_to_cart(driver, credentials):
@@ -8,15 +14,11 @@ def test_add_item_to_cart(driver, credentials):
     login_page = LoginPage(driver)
     login_page.login(username, password)
 
-    # click first "Add to cart"
-    add_button = driver.find_element(By.XPATH, "(//button[contains(text(),'Add to cart')])[1]")
-    add_button.click()
+    inventory_page = InventoryPage(driver)
+    first_item_name = inventory_page.get_item_names()[0]
+    inventory_page.add_first_item_to_cart()
+    inventory_page.open_cart()
 
-    # open cart
-    cart_icon = driver.find_element(By.CLASS_NAME, "shopping_cart_link")
-    cart_icon.click()
+    cart_page = CartPage(driver)
 
-    # verify item is in cart
-    item = driver.find_element(By.CLASS_NAME, "inventory_item_name")
-
-    assert item.is_displayed()
+    assert cart_page.get_item_names() == [first_item_name]

@@ -1,6 +1,11 @@
+import pytest
+
 from selenium.webdriver.support.ui import Select
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
+
+
+pytestmark = pytest.mark.selenium
 
 
 def test_sort_products_name_a_to_z(driver, credentials):

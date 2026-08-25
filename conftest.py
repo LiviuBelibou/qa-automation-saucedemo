@@ -2,7 +2,6 @@ import os
 import pytest
 from datetime import datetime
 
-import pytest_html
 from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException, NoSuchWindowException
@@ -45,7 +44,9 @@ def credentials():
 
 @pytest.fixture
 def api_client():
-    return APIClient()
+    client = APIClient()
+    yield client
+    client.close()
 
 
 @pytest.fixture

@@ -1,5 +1,10 @@
+import pytest
+
 from playwright_pages.login_page import PlaywrightLoginPage
 from playwright_pages.inventory_page import PlaywrightInventoryPage
+
+
+pytestmark = pytest.mark.playwright
 
 
 def test_playwright_add_to_cart(page, credentials):
