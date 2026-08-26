@@ -39,7 +39,6 @@ def test_login_button_is_visible_and_enabled(driver):
 
     assert button.is_displayed()
     assert button.is_enabled()
-    
 
 def test_logout_redirects_to_login(driver, credentials):
     wait = WebDriverWait(driver, 10)
